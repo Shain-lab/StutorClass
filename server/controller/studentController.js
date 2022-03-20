@@ -28,7 +28,7 @@ module.exports = {
         }
         const { registrationNumber, password } = req.body;
 
-        const student = true;
+        const student = await Student.findOne({ registrationNumber });
         if (!student) {
             errors.registrationNumber = 'Registration number not found';
             return res.status(404).json(errors);

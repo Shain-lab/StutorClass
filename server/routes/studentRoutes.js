@@ -1,7 +1,5 @@
 const express = require('express')
-const passport = require('passport')
 const router = express.Router()
-const upload = require('../utils/multer')
 
 const { checkAttendence, getAllStudents, getStudentByName, studentLogin,
     updatePassword, forgotPassword, getStudentByRegName,
@@ -15,32 +13,31 @@ router.post('/forgotPassword', forgotPassword)
 router.post('/postOTP', postOTP)
 
 //UPLOAD PROFILE
-router.post('/updateProfile', passport.authenticate('jwt', { session: false }),
-    upload.single("avatar"), updateProfile)
+router.post('/updateProfile', updateProfile)
 
 //UPLOAD PASSWORD
-router.post('/updatePassword', passport.authenticate('jwt', { session: false }), updatePassword)    
+router.post('/updatePassword', updatePassword)    
 
 //CHAT RELATED ROUTES    
-router.get('/chat/:roomId', passport.authenticate('jwt', { session: false }), getPrivateChat)
+router.get('/chat/:roomId', getPrivateChat)
 
-router.post('/chat/:roomId', passport.authenticate('jwt', { session: false }), postPrivateChat)
+router.post('/chat/:roomId', postPrivateChat)
  
-router.get('/chat/newerChats/:receiverName', passport.authenticate('jwt', { session: false }), differentChats)
+router.get('/chat/newerChats/:receiverName', differentChats)
     
-router.get('/chat/previousChats/:senderName', passport.authenticate('jwt', { session: false }), previousChats)
+router.get('/chat/previousChats/:senderName', previousChats)
     
-router.get('/getMarks', passport.authenticate('jwt', { session: false }),getMarks)
+router.get('/getMarks',getMarks)
 
-router.get('/getAllSubjects', passport.authenticate('jwt', { session: false }), getAllSubjects)
+router.get('/getAllSubjects', getAllSubjects)
 
-router.get('/checkAttendence', passport.authenticate('jwt', { session: false }), checkAttendence)
+router.get('/checkAttendence', checkAttendence)
 
 //HELPER ROUTES
-router.post('/getAllStudents', passport.authenticate('jwt', { session: false }), getAllStudents)
+router.post('/getAllStudents', getAllStudents)
 
-router.post('/getStudentByRegName', passport.authenticate('jwt', { session: false }), getStudentByRegName)
+router.post('/getStudentByRegName', getStudentByRegName)
 
-router.post('/getStudentByName', passport.authenticate('jwt', { session: false }), getStudentByName)
+router.post('/getStudentByName', getStudentByName)
 
 module.exports = router

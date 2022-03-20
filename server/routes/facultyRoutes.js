@@ -1,7 +1,4 @@
 const express = require('express')
-const passport = require('passport')
-const upload = require('../utils/multer')
-
 const router = express.Router()
 
 const { fetchStudents, markAttendence, facultyLogin, getAllSubjects,
@@ -13,16 +10,16 @@ router.post('/forgotPassword', forgotPassword)
 
 router.post('/postOTP', postOTP)
 
-router.post('/updateProfile', passport.authenticate('jwt', { session: false }), upload.single("avatar") ,updateProfile)
+router.post('/updateProfile' ,updateProfile)
 
-router.post('/fetchStudents', passport.authenticate('jwt', { session: false }), fetchStudents)
+router.post('/fetchStudents', fetchStudents)
 
-router.post('/fetchAllSubjects', passport.authenticate('jwt', { session: false }), getAllSubjects)
+router.post('/fetchAllSubjects', getAllSubjects)
 
-router.post('/markAttendence', passport.authenticate('jwt', { session: false }), markAttendence)
+router.post('/markAttendence', markAttendence)
 
-router.post('/uploadMarks', passport.authenticate('jwt', { session: false }),uploadMarks)
+router.post('/uploadMarks',uploadMarks)
 
-router.post('/updatePassword', passport.authenticate('jwt', { session: false }), updatePassword)
+router.post('/updatePassword', updatePassword)
 
 module.exports = router

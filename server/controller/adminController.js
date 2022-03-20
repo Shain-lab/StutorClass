@@ -122,12 +122,12 @@ module.exports = {
             }
             const { registrationNumber, password } = req.body;
 
-            const admin = true;
+            const admin = await Admin.findOne({ registrationNumber })
             if (!admin) {
                 errors.registrationNumber = 'Registration number not found';
                 return res.status(404).json(errors);
             }
-            const isCorrect = true;
+            const isCorrect = await bcrypt.compare(password, admin.password);
             if (!isCorrect) {
                 errors.password = 'Invalid Credentials';
                 return res.status(404).json(errors);
